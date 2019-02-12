@@ -13,6 +13,7 @@ from moviepy.editor import VideoFileClip
 from pymongo import MongoClient
 
 
+#variables for inserting into MongoDB
 glob_data = []
 notes_screenshots = []
 length = 0
@@ -29,8 +30,7 @@ class FeatureType(Enum):
     WORD = 4
     SYMBOL = 5
 
-
-# not used
+# not used in final implementation
 def draw_boxes(image, bounds, color):
     """Draw a border around the image using the hints in the vector list."""
     draw = ImageDraw.Draw(image)
@@ -55,7 +55,6 @@ def get_document_bounds(videoIO, feature, folderPath, youtube_id):
     global prev_time
     global secs
     global temp
-    """Returns document bounds given an image."""
 
     # setting up frame by frame per 5 secs
     myclip = VideoFileClip(videoIO)
@@ -63,11 +62,8 @@ def get_document_bounds(videoIO, feature, folderPath, youtube_id):
 
     for frame in myclip.iter_frames(fps=0.2):
         frames.append(frame)
-        # print("hi")
 
     for count, single_frame in enumerate(frames, start=1):
-        # print("stephen")
-        #print(i)
         img = Image.fromarray(single_frame,'RGB')
 
         dir_path = os.path.dirname(os.path.realpath(__file__))
